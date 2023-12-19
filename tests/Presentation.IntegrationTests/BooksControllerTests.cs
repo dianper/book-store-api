@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace Presentation.IntegrationTests
 {
-    [Trait("Category", "Integration Tests")]
+    [Trait("Category", "Controller Integration Tests")]
     public class BooksControllerTests : IClassFixture<WebApplicationFactory<Program>>
     {
         private readonly WebApplicationFactory<Program> _factory;

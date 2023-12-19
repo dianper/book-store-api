@@ -10,6 +10,7 @@ using System.Net;
 
 namespace Presentation.Tests
 {
+    [Trait("Category", "Controller Unit Tests")]
     public class BooksControllerTests
     {
         private readonly Mock<IMediator> mediatorMock;
