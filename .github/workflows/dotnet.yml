@@ -23,8 +23,8 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore src/BookStoreApi.sln
     - name: Build
-      run: dotnet build src/BookStoreApi.sln --configuration Release --no-restore
+      run: dotnet build --no-restore src/BookStoreApi.sln --configuration Release
     - name: Unit Test
-      run: dotnet test --no-build src/BookStoreApi.sln --filter FullyQualifiedName!~IntegrationTests
+      run: dotnet test --no-build src/BookStoreApi.sln --no-restore --configuration Release --filter FullyQualifiedName!~IntegrationTests
     - name: Integration Test
-      run: dotnet test --no-build src/BookStoreApi.sln --filter FullyQualifiedName~IntegrationTests
+      run: dotnet test --no-build src/BookStoreApi.sln --no-restore --configuration Release --filter FullyQualifiedName~IntegrationTests
