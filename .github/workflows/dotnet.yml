@@ -25,6 +25,6 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore src/
     - name: Unit Test
-      run: dotnet test --no-build --verbosity normal --filter Category="Controller Unit Tests" src/
+      run: dotnet test --no-build --verbosity normal --filter Category='Unit Tests' src/
     - name: Integration Test
-      run: dotnet test --no-build --verbosity normal --filter Category="Controller Integration Tests" src/
+      run: dotnet test --no-build --verbosity normal --filter Category='Integration Tests' src/
