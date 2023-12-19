@@ -23,6 +23,8 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore src/
     - name: Build
-      run: dotnet build --no-restore src/
-    - name: Test
-      run: dotnet test --no-build --verbosity normal src/
+      run: dotnet build --configuration Release --no-restore src/
+    - name: Unit Test
+      run: dotnet test --no-build --verbosity normal --filter Category!="Integration Tests" src/
+    - name: Integration Test
+      run: dotnet test --no-build --verbosity normal --filter Category="Integration Tests" src/
