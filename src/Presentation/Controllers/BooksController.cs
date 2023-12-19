@@ -27,7 +27,7 @@ public class BooksController : ControllerBase
     }
 
     [HttpGet]
-    [ProducesResponseType(typeof(List<Book>), 200)]
+    [ProducesResponseType(typeof(List<Book>), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<List<Book>>> GetAsync(CancellationToken cancellationToken)
     {
         var books = await this.mediator.Send(new GetBooksQuery(), cancellationToken);
@@ -50,7 +50,7 @@ public class BooksController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(Book), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> CreateBookAsync(Book book, CancellationToken cancellationToken)
+    public async Task<ActionResult<Book>> CreateBookAsync(Book book, CancellationToken cancellationToken)
     {
         var command = this.mapper.Map<CreateBookCommand>(book);
 
