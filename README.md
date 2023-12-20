@@ -13,7 +13,7 @@
 
 ### Containerize
 - Dockerfile
-- Docker Compose (WIP)
+- Docker Compose (TODO)
 
 ### Authentication
 - JWT
@@ -28,8 +28,8 @@
 - Circuit Breaker 
     
 ### Cache
-- Memory
-- Redis (WIP)
+- Memory (WIP)
+- Redis (TODO)
 
 ### Tests
 - xUnit
@@ -41,4 +41,7 @@
 - GitHub Actions
 
 ### Metrics
-- Prometheus 
+- Prometheus
+
+### Observability
+- OpenTelemetry (TODO)
