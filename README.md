@@ -12,3 +12,7 @@
 - Swagger
 - Dockerfile
 - Github Actions
+- Health Checks
+- Metrics
+- Cache
+- Polly

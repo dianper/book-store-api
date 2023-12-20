@@ -1,8 +1,23 @@
 using Application;
 using Infrastructure;
 using Presentation;
+using Presentation.Middlewares;
+using Prometheus;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Logging
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+
+// Memory Cache
+builder.Services
+    .AddMemoryCache();
+
+// Health Check
+builder.Services
+    .AddHealthChecks()
+    .AddDbContextCheck<BookStoreDbContext>();
 
 // Jwt Authentication
 builder.Services.AddJwtAuthentication(builder.Configuration);
@@ -12,15 +27,21 @@ builder.Services
     .AddApplicationServices() // IServices
     .AddInfrastructureRepositories() // IRepositories
     .AddMappers() // AutoMapper
-    .AddQueryHandlers(); // MediatR
+    .AddQueryHandlers() // MediatR Queries
+    .AddCommandHandlers(); // MediatR Commands
 
-builder.Services.AddControllers();
+builder.Services
+    .AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGenWithJwtConfiguration();
 
 var app = builder.Build();
+
+// Request Headers
+app.UseMiddleware<RequestHeadersMiddleware>();
+app.UseMiddleware<MetricsMiddleware>();
 
 // Create Db
 var db = app.Services.GetService<BookStoreDbContext>();
@@ -33,6 +54,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMetricServer();
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
@@ -41,6 +64,9 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.MapHealthChecks("/monitoring/ping");
+
 app.Run();
 
+// Partial class is used in the Integration Tests
 public partial class Program { }
