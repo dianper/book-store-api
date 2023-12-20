@@ -44,7 +44,7 @@ public class TodoService
         {
             var todos = await this.httpClient
                 .GetFromJsonAsync<IEnumerable<Todo>>(
-                    requestUri: $"todos?userId={userId}",
+                    $"todos?userId={userId}",
                     options: new JsonSerializerOptions(JsonSerializerDefaults.Web),
                     cancellationToken);
 
@@ -56,5 +56,24 @@ public class TodoService
         }
 
         return Enumerable.Empty<Todo>();
+    }
+
+    public async Task<Todo?> GetTodosByIdAsync(int id, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var todo = await this.httpClient.GetFromJsonAsync<Todo>(
+                $"todos/{id}", 
+                options: new JsonSerializerOptions(JsonSerializerDefaults.Web), 
+                cancellationToken);
+
+            return todo ?? default;
+        }
+        catch (Exception ex)
+        {
+            this.logger.LogError("Error getting data: {Error}", ex);
+        }
+
+        return default;
     }
 }

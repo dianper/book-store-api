@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Application.Queries.Todos.Queries;
 
-public class GetTodosQuery : IRequest<List<Todo>>
+public class GetTodosQuery : IRequest<IEnumerable<Todo>>
 {
 
 }

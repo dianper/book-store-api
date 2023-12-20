@@ -1,9 +1,11 @@
 using Application;
 using Infrastructure;
 using Infrastructure.ExternalServices;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Polly;
 using Polly.Extensions.Http;
 using Presentation;
+using Presentation.HealthChecks;
 using Presentation.Middlewares;
 using Prometheus;
 
@@ -24,7 +26,8 @@ builder.Services
 // Health Check
 builder.Services
     .AddHealthChecks()
-    .AddDbContextCheck<BookStoreDbContext>();
+    .AddDbContextCheck<BookStoreDbContext>()
+    .AddCheck<TodoApiHealthCheck>("TodoApiHealthCheck", failureStatus: HealthStatus.Unhealthy);
 
 // Jwt Authentication
 builder.Services.AddJwtAuthentication(builder.Configuration);

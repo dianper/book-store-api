@@ -14,5 +14,5 @@
 - Github Actions
 - Health Checks
 - Metrics
-- Cache
 - Polly
+- Cache
