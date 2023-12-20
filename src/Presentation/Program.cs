@@ -1,23 +1,24 @@
 using Application;
-using Application.Queries.Books.Handlers;
 using Infrastructure;
 using Presentation;
-using Presentation.Mapper;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Jwt Authentication
+builder.Services.AddJwtAuthentication(builder.Configuration);
 
 // Add services to the container.
 builder.Services
     .AddApplicationServices() // IServices
-    .AddInfrastructureRepositories() // IRepository
+    .AddInfrastructureRepositories() // IRepositories
     .AddMappers() // AutoMapper
     .AddQueryHandlers(); // MediatR
 
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGenWithJwtConfiguration();
 
 var app = builder.Build();
 
@@ -33,6 +34,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

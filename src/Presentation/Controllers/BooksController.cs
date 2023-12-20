@@ -2,6 +2,7 @@ using Application.Commands.Books.Commands;
 using Application.Queries.Books.Queries;
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Models;
 using System.Net;
@@ -35,6 +36,7 @@ public class BooksController : ControllerBase
         return Ok(this.mapper.Map<List<Book>>(books));
     }
 
+    [Authorize]
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(Book), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
