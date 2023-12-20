@@ -1,10 +1,17 @@
 using Application;
 using Infrastructure;
+using Infrastructure.ExternalServices;
+using Polly;
+using Polly.Extensions.Http;
 using Presentation;
 using Presentation.Middlewares;
 using Prometheus;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// HttpClient & Polly
+builder.Services
+    .AddHttpClient(builder.Configuration);
 
 // Logging
 builder.Logging.ClearProviders();

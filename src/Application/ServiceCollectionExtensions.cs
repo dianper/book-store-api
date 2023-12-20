@@ -1,5 +1,6 @@
 ﻿using Application.Commands.Books.Handlers;
 using Application.Queries.Books.Handlers;
+using Application.Queries.Todos.Handlers;
 using Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,7 +19,9 @@ public static class ServiceCollectionExtensions
     {
         services
             .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(GetBooksQueryHandler)))
-            .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(GetBooksByIdQueryHandler)));
+            .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(GetBooksByIdQueryHandler)))
+            .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(GetTodosByUserIdQueryHandler)))
+            .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(GetTodosQueryHandler)));
 
         return services;
     }
