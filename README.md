@@ -2,17 +2,43 @@
 
 [![.NET](https://github.com/dianper/webapi/actions/workflows/dotnet.yml/badge.svg)](https://github.com/dianper/webapi/actions/workflows/dotnet.yml)
 
-- Clean Architecture
-- DotNet 6
-- EF Core 6
-- SQL Server In Memory
-- JWT Authentication
-- MediatR
-- AutoMapper
+### Clean Architecture
+
+### .Net 6
 - Swagger
-- Dockerfile
-- Github Actions
+- EF6
+- SQL Server (In Memory)
+- AutoMapper
 - Health Checks
-- Metrics
-- Polly
-- Cache
+
+### Containerize
+- Dockerfile
+- Docker Compose (WIP)
+
+### Authentication
+- JWT
+
+### MediatR
+- Commands
+- Queries
+
+### Polly
+- Timeout
+- Retry
+- Circuit Breaker 
+    
+### Cache
+- Memory
+- Redis (WIP)
+
+### Tests
+- xUnit
+- Moq
+- Unit Tests
+- Integration Tests
+
+### CI
+- GitHub Actions
+
+### Metrics
+- Prometheus 
