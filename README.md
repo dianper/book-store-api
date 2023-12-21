@@ -1,4 +1,4 @@
-# Book Store WebAPI
+# Book Store API
 
 [![.NET](https://github.com/dianper/webapi/actions/workflows/dotnet.yml/badge.svg)](https://github.com/dianper/webapi/actions/workflows/dotnet.yml)
 
