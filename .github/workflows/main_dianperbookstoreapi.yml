@@ -11,21 +11,28 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-
+      - uses: actions/checkout@v3
       - name: Set up .NET Core
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '6.0.x'
-          include-prerelease: true
 
-      - name: Build with dotnet
-        run: dotnet build --configuration Release
-
-      - name: dotnet publish
+      - name: Restore dependencies
+        run: dotnet restore src/BookStoreApi.sln
+      
+      - name: Build
+        run: dotnet build --no-restore src/BookStoreApi.sln --configuration Release
+      
+      - name: Unit Test
+        run: dotnet test --no-build src/BookStoreApi.sln --no-restore --configuration Release --filter FullyQualifiedName!~IntegrationTests
+      
+      - name: Integration Test
+        run: dotnet test --no-build src/BookStoreApi.sln --no-restore --configuration Release --filter FullyQualifiedName~IntegrationTests
+      
+      - name: Publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
@@ -35,7 +42,7 @@ jobs:
           path: ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     needs: build
     environment:
       name: 'Production'
