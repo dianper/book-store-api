@@ -33,7 +33,7 @@ jobs:
         run: dotnet test --no-build src/BookStoreApi.sln --no-restore --configuration Release --filter FullyQualifiedName~IntegrationTests
       
       - name: Publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish src/BookStoreApi.sln --configuration Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
