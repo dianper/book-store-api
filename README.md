@@ -37,8 +37,9 @@
 - Unit Tests
 - Integration Tests
 
-### CI
-- GitHub Actions
+### CI / CD
+- GitHub Actions (Restore, Build, Test and Deploy)
+- Azure App Services
 
 ### Metrics
 - Prometheus
