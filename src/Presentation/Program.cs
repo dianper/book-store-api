@@ -58,9 +58,10 @@ var db = app.Services.GetService<BookStoreDbContext>();
 db.Database.EnsureCreated();
 
 // Configure the HTTP request pipeline.
+app.UseSwagger();
+
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
     app.UseSwaggerUI();
 }
 
