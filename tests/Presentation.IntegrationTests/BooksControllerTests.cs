@@ -19,8 +19,9 @@ namespace Presentation.IntegrationTests
         public async Task BooksController_GetBookById_ReturnsBook()
         {
             // Arrange
-            var client = _factory.CreateClient();
+            Environment.SetEnvironmentVariable("Shell:Enabled", "true");
 
+            var client = _factory.CreateClient();
             var token = await this.GetJwtTokenAsync(client);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
